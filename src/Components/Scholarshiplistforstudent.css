@@ -1,0 +1,53 @@
+.top-search-section {
+    width: 100%;
+    height: max-content;
+    background-color: white;
+    display: flex;
+}
+
+.back-logo {
+    font-size: 25px;
+    color: #1c1d6d;
+    margin-top: 15px;
+    margin-left: 10px;
+
+}
+
+.search-input {
+    background-color: #f0f1ff;
+    width: 90%;
+    height: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+
+}
+
+.Scholarship-heading-top {
+    background-color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+   
+}
+
+.search-logo {
+    font-size: 25px;
+    color: white;
+    background-color: #1c1d6d;
+    padding: 4px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+}
+
+.strong {
+    font-size: 14px;
+}
+
+.Scholarship-det-text {
+    font-size: 14px;
+    padding: 3px;
+
+}

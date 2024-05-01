@@ -1,0 +1,21 @@
+.pending {
+  color: rgb(243, 231, 4);
+}
+
+.accepted {
+  color: rgb(4, 184, 4);
+}
+
+.rejected {
+  color: red;
+}
+
+.status-text {
+  font-size: 12px;
+  padding: 10px;
+  padding-top: 15px;
+}
+
+.status-heading {
+  color: Black;
+}

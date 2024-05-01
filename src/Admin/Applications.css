@@ -1,0 +1,30 @@
+.accept-btn{
+    background-color: rgb(137, 228, 1);
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    border-style: none;
+    border-radius: 6px;
+    color: white
+}
+.reject-btn{
+    background-color: rgb(183, 10, 10);
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    border-style: none;
+    border-radius: 6px;
+    color: white;
+}
+.view-btn{
+    background-color: #1E1F4A;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    border-style: none;
+    border-radius: 6px;
+    color: white;
+}

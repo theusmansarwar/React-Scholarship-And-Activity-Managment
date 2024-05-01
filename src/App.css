@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f1ff;
+}
+
+.topmenu {
+  background-color: #1E1F4A;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.close-icon,
+.hamburger-icon {
+  font-size: 25px;
+}
+
+ul{
+  background-color: white;
+  padding: 15px;
+}
+li{
+  padding: 5px;
+  list-style: none;
+  
+}
+li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.content-area{
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #e2e4fe;
+    
+ 
+
+
+}
+

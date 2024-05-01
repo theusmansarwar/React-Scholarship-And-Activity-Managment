@@ -1,0 +1,85 @@
+.addbtn {
+    background-color: #1E1F4A;
+    color: white;
+    padding: 5px;
+    width: fit-content;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 4px;
+    border-style: none;
+
+}
+
+.addbtn2 {
+    background-color: #1E1F4A;
+    color: white;
+    padding: 5px;
+    width: fit-content;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 8px;
+    border-radius: 4px;
+    border-style: none;
+
+    height: 30px;
+
+}
+
+.addbtn3 {
+    background-color: #b0b0b7;
+    color: white;
+    padding: 5px;
+    width: fit-content;
+
+    margin-top: 8px;
+    border-radius: 4px;
+    border-style: none;
+
+    height: 30px;
+
+}
+
+.news-top {
+    display: flex;
+
+
+}
+
+.left-neews-top {
+    width: 93%;
+    text-align: left;
+    justify-content: left;
+    align-self: left;
+}
+
+.right-news-top {
+    width: 7%;
+}
+
+
+
+.left-content-area-news {
+
+    width: 98%;
+}
+
+.icon-del {
+    color: red;
+}
+
+.main-content-div {
+    display: flex;
+}
+
+.edit-area-inputs {
+    display: flex;
+}
+
+.edit-area-inputs-feild {
+    margin: 10px;
+    width: 30%;
+}
+
+.savebtn2 {
+    background-color: #1E1F4A;
+}

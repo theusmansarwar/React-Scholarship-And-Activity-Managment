@@ -1,0 +1,208 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+.homepage {
+    width: 110%;
+
+}
+
+.topsection {
+    position: relative;
+    background-color: #1c1d6d;
+    width: 100%;
+    height: 100px;
+    margin-top: 55px;
+
+}
+
+.images {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    margin-left: 80px;
+    top: -55px;
+}
+
+.bblockimage {
+    height: 200px;
+}
+
+.logoimage {
+    position: absolute;
+    padding: 25px;
+    height: 150px;
+    padding-top: 30px;
+    top: 0;
+    left: 0;
+}
+
+.color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 7, 118, 0.715);
+}
+
+.rightsection {
+    margin-left: 300px;
+    color: white;
+
+    padding-top: 15px;
+    padding-left: 0%;
+    display: flex;
+}
+
+.logosection {
+
+    font-size: 25px;
+    width: 50%;
+    padding-left: 30px;
+}
+
+.slogen {
+    width: 50%;
+    margin-left: 200px;
+
+}
+
+.slogentext {
+    font-size: 12px;
+    width: 50%;
+}
+
+.mainsectionhome {
+    display: flex;
+}
+
+.leftsideofmainsection {
+
+    width: 25%;
+
+    padding: 30px;
+    padding-top: 60px;
+}
+
+.midsideofmainsection {
+
+    height: 400px;
+    width: 45%;
+    padding-top: 10px;
+
+}
+
+.rightsideofmainsection {
+
+
+    width: 30%;
+    padding-top: 20px;
+}
+
+.cardareas {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+    margin-bottom: 65px;
+}
+
+.card {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    background-color: white;
+    width: 100px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+    
+}
+
+.modulename {
+    font-size: 12px;
+}
+
+.modulelogo {
+    font-size: 30px;
+    margin: 24px;
+    color: #1c1d6d;
+    margin-bottom: 10px;
+
+}
+
+.campusimagearea {
+    background-color: white;
+    width: fit-content;
+    padding: 20px;
+    margin-left: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+
+}
+
+.campusimagesection {
+    display: flex;
+
+}
+
+.campusimg {
+    height: 80px;
+    margin: 5px;
+}
+
+.campustext {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.unidescription {
+    width: 50%;
+    font-size: 13px;
+    text-align: justify;
+}
+
+.campustext2 {
+    margin: 0%;
+    padding: 0%;
+    justify-content: center;
+}
+
+.cuiintro {
+
+    font-size: 14px;
+    text-align: justify;
+    padding-right: 30px;
+}
+
+.websiteslinks {
+    padding-top: 20px;
+}
+
+a {
+    font-size: 12px;
+}
+
+.bottom {
+    background-color: #1c1d6d;
+    height: 50px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.footer-credit {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.bottom2 {
+    background-color: #1c1d6d;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
