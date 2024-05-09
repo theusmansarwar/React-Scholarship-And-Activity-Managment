@@ -5,6 +5,7 @@ import { MdDelete, MdModeEditOutline } from 'react-icons/md';
 import { getDatabase, ref, onValue, remove, update } from 'firebase/database';
 import { IoArrowBackOutline, IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { MdFiberNew } from "react-icons/md";
 const ScholarshipList = () => {
 
   const [scholarshipList, setScholarshipList] = useState([]);
@@ -91,11 +92,22 @@ const ScholarshipList = () => {
   };
 
   const filteredScholarships = scholarshipList.filter((scholarship) => {
-    const titleMatches =
-      searchName === '' || scholarship.scholarshipTitle.toLowerCase().includes(searchName.toLowerCase());
-
-    return titleMatches;
+    const searchTerm = searchName.toLowerCase();
+    const titleMatches = scholarship.scholarshipTitle.toLowerCase().includes(searchTerm);
+    const typeMatches = scholarship.scholarshipType.toLowerCase().includes(searchTerm);
+    return titleMatches || typeMatches;
   });
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB'); 
+}
+const isNewItem = (uploadDate) => {
+    const currentDate = new Date();
+    const itemDate = new Date(uploadDate);
+    const differenceInTime = currentDate.getTime() - itemDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    return differenceInDays < 7;
+};
   return (
     <div className='loading2'>
       {loading2 ? (
@@ -119,7 +131,7 @@ const ScholarshipList = () => {
           </div>
 
           {filteredScholarships.length > 0 ? (
-            
+
             <ul className='Userslist'>
               {filteredScholarships.map((scholarship) => (
                 <li className='editareaofuser' key={scholarship.id}>
@@ -133,6 +145,13 @@ const ScholarshipList = () => {
                         <strong>Amount:</strong> {scholarship.scholarshipAmount}<br /></p>
                       <p className='Scholarship-det-text'>
                         <strong>Criteria:</strong> {scholarship.eligibilityCriteria}</p>
+                        <p className='Scholarship-det-text'>
+                        <strong>Required Documents:</strong> {scholarship.RequiredDocuments}</p>
+                        
+
+                        <p className='Scholarship-det-text'>
+                          <strong>Created On:</strong> {formatDate(scholarship.uploadDate)}</p>
+                          <a href={scholarship.detaillink}>See details</a>
                     </div>
                     <div className="actions">
                       <MdDelete
@@ -146,6 +165,7 @@ const ScholarshipList = () => {
                         onClick={() => handleEditClick(scholarship.id)}
                       />
                     </div>
+                    <div className="newicon">{isNewItem(scholarship.uploadDate) && <MdFiberNew />}</div>
                   </div>
                   {editMode[scholarship.id] && (
                     <div className="editsection">
@@ -174,6 +194,30 @@ const ScholarshipList = () => {
                             handleInputChange(scholarship.id, 'eligibilityCriteria', e.target.value)
                           }
                         />
+                            <textarea
+                          type="text"
+                          className='userslistinputs'
+                          value={scholarship.RequiredDocuments}
+                          name="RequiredDocuments"
+                          placeholder='Required Documents'
+                          required
+                          readOnly={!editMode[scholarship.id]}
+                          onChange={(e) =>
+                            handleInputChange(scholarship.id, 'RequiredDocuments', e.target.value)
+                          }
+                        />
+                           <input
+                          type="link"
+                          className='userslistinputs'
+                          value={scholarship.detaillink}
+                          name="detaillink"
+                          placeholder='detaillink'
+                          required
+                          readOnly={!editMode[scholarship.id]}
+                          onChange={(e) =>
+                            handleInputChange(scholarship.id, 'detaillink', e.target.value)
+                          }
+                        />
                         <button
                           type="button"
                           className="savebtn"
@@ -181,6 +225,8 @@ const ScholarshipList = () => {
                             handleSaveClick(scholarship.id, {
                               scholarshipAmount: scholarship.scholarshipAmount,
                               eligibilityCriteria: scholarship.eligibilityCriteria,
+                              RequiredDocuments: scholarship.RequiredDocuments,
+                              detaillink: scholarship.detaillink,
                             })
                           }
                         >

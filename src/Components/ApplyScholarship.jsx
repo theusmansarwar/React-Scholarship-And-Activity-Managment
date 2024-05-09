@@ -33,7 +33,7 @@ const ApplyScholarship = () => {
           .then((snapshot) => {
             if (snapshot.exists()) {
               const data = snapshot.val();
-              console.log('User Data:', data); 
+              console.log('User Data:', data);
               setUserData(data);
             } else {
               console.log('User data does not exist.');
@@ -54,11 +54,15 @@ const ApplyScholarship = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      pdfFile: file,
-    });
-    setFileSelected(true); // Set fileSelected to true when a file is selected
+    if (file && file.name.endsWith(".zip")) { // Check if the selected file has a .zip extension
+      setFormData({
+        ...formData,
+        pdfFile: file,
+      });
+      setFileSelected(true); // Set fileSelected to true when a valid file is selected
+    } else {
+      alert("Please select a ZIP file."); // Alert the user if the selected file is not a ZIP file
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -71,8 +75,6 @@ const ApplyScholarship = () => {
       }
       const storageRefInstance = storageRef(storage, `ScholarshipsData/${formData.pdfFile.name}`);
       const uploadTask = uploadBytes(storageRefInstance, formData.pdfFile);
-
-
 
       await uploadTask;
       const downloadURL = await getDownloadURL(storageRefInstance);
@@ -110,58 +112,55 @@ const ApplyScholarship = () => {
   }
 
   return (
-
-
-    <div className='loading2'> 
-    {loading2 ? (
-       <center><div className='loading-spinner2'></div></center> 
-    ) : (
-    <div className="main-area-div">
-      <div className="top-heading-area">
-        <div className="left-logo-side">
-          <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-          <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
-        </div>
-        <div className="right-logo-side"></div>
-      </div>
-      <div className="sub-area-div">
-        <div className="form-area4">
-          <center>
-            <h3>Apply For Scholarship</h3>
-          </center>
-          <br />
-          <h6 className="Stittle">{scholarshipTitle}</h6>
-          <div className="inputdiv">
-            <label>Select Documents: </label>
-            <input
-              type="file"
-              id="pdfFile"
-              name="pdfFile"
-              onChange={handleFileChange}
-              required
-            />
+    <div className='loading2'>
+      {loading2 ? (
+        <center><div className='loading-spinner2'></div></center>
+      ) : (
+        <div className="main-area-div">
+          <div className="top-heading-area">
+            <div className="left-logo-side">
+              <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
+              <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
+            </div>
+            <div className="right-logo-side"></div>
           </div>
-          <br />
-
-          
-          <button className="submitbtn" onClick={handleSubmit} disabled={!fileSelected || uploadPercentage > 0}>
-           Submit
-          </button>
-          <div className="centeredtextarea">
-            <p className="simpletext">
-              Back to <Link className="simpletextlink" to="/Scholarshiplistforstudent">Scholarships</Link>
+          <div className="sub-area-div">
+            <div className="form-area4">
+              <center>
+                <h3>Apply For Scholarship</h3>
+              </center>
+              <br />
+              <h6 className="Stittle">{scholarshipTitle}</h6>
+              <div className="inputdiv">
+                <label>Select Documents: </label>
+                <input
+                  type="file"
+                  id="pdfFile"
+                  name="pdfFile"
+                  onChange={handleFileChange}
+                  required
+                />
+              </div>
+              <br />
+              <button className="submitbtn" onClick={handleSubmit} disabled={!fileSelected || uploadPercentage > 0}>
+                Submit
+              </button>
+              <div className="centeredtextarea">
+                <p className="simpletext">
+                  Back to <Link className="simpletextlink" to="/Scholarshiplistforstudent">Scholarships</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="bottom">
+            <p className="footer-credit">
+              Copyright © 2020, All Rights Reserved by CUOnline-COMSATS
             </p>
           </div>
         </div>
-      </div>
-      <div className="bottom">
-        <p className="footer-credit">
-          Copyright © 2020, All Rights Reserved by CUOnline-COMSATS
-        </p>
-      </div>
+      )}
     </div>
-     )}
-     </div>
   );
 };
+
 export default ApplyScholarship;

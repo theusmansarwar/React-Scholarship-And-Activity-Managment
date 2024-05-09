@@ -1,7 +1,7 @@
 
 import { SiGooglescholar } from "react-icons/si";
 import React, { useState, useEffect } from 'react';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth'; 
 import { app } from '../firebase';
 import { useNavigate } from "react-router-dom";
 
@@ -10,9 +10,10 @@ import './fdashboard.css';
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaFileAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
-import { MdDelete, MdModeEditOutline } from 'react-icons/md';
+import { MdDelete, MdModeEditOutline,MdEditNotifications } from 'react-icons/md';
 import { LuActivity } from "react-icons/lu";
 import { FaNetworkWired } from "react-icons/fa6";
+import { IoNotifications } from "react-icons/io5";
 
 
 
@@ -62,30 +63,43 @@ const Facultydashboard = () => {
   };
   const navigatetonextpage0 = () => {
     setLoading2(true);
-     navigate('/Login');
+    navigate('/Login');
   };
 
   const navigatetonextpage3 = () => {
     setLoading2(true);
-     navigate('/Addnews');
+    navigate('/Addnews');
   };
   const navigatetonextpage2 = () => {
     setLoading2(true);
-     navigate('/Userslist');
+    navigate('/Userslist');
   };
   const navigatetonextpage1 = () => {
     setLoading2(true);
-     navigate('/Applications');
+    navigate('/Applications');
   };
   const navigatetonextpage4 = () => {
     setLoading2(true);
-     navigate('/Activities');
+    navigate('/Activities');
   };
   const navigatetonextpage5 = () => {
     setLoading2(true);
-     navigate('/Societies');
+    navigate('/Societies');
   };
+  const navigatetonextpage8 = () => {
+    setLoading2(true);
+    navigate('/AddNotification');
+  };
+ 
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Ensure auth is initialized and signOut correctly
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  };
 
   const handleEditClick = (index) => {
     setEditModeIndex(index);
@@ -131,10 +145,10 @@ const Facultydashboard = () => {
           <div className="top-area">
             <div className="left-logo-side">
               <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-              <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+              <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
             </div>
             <div className="right-logo-side">
-              <div className="logout-section" onClick={navigatetonextpage0}>
+              <div className="logout-section" onClick={handleLogout}>
                 <p className="logout-text">Logout</p>
                 <IoLogOutOutline className="logout-button" />
               </div>
@@ -149,7 +163,7 @@ const Facultydashboard = () => {
               <FaFileAlt className="module-logo" />
               <p className='module-name'>Applications</p>
             </div>
-           
+
             <div className="module" onClick={navigatetonextpage5}>
               <FaNetworkWired className="module-logo" />
               <p className='module-name'>Societies</p>
@@ -162,6 +176,11 @@ const Facultydashboard = () => {
               <FaUsers className="module-logo" onClick={navigatetonextpage2} />
               <p className='module-name'>Users</p>
             </div>
+            <div className="module">
+              <IoNotifications className="module-logo" onClick={navigatetonextpage8} />
+              <p className='module-name'>Create Notification</p>
+            </div>
+            
           </div>
           <div className="latest-news-area">
             <div className="news-top">

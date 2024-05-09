@@ -1,10 +1,10 @@
 import { SiGooglescholar } from "react-icons/si";
 import { TbProgress } from "react-icons/tb";
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'; 
 import { app } from '../firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import { IoLogOutOutline } from "react-icons/io5";
 import { LuActivity } from "react-icons/lu";
@@ -19,6 +19,8 @@ const Dashboard = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userType, setUserType] = useState('');
+  const navigate = useNavigate(); // Move the declaration of navigate before using it
+
   useEffect(() => {
     const notificationsRef = ref(database, 'news');
     const unsubscribe = onValue(notificationsRef, (snapshot) => {
@@ -38,7 +40,7 @@ const Dashboard = () => {
         const userRef = ref(database, `userdata/${userId}/president`);
         onValue(userRef, (snapshot) => {
           const userType = snapshot.val();
-          setUserType(userType); 
+          setUserType(userType);
         });
       }
     });
@@ -46,36 +48,45 @@ const Dashboard = () => {
   }, [database]);
 
   const navigatetonextpage = () => {
-     navigate( '/Scholarshiplistforstudent');
+    navigate('/Scholarshiplistforstudent');
   };
 
   const navigatetonextpage2 = () => {
-     navigate( '/Status');
+    navigate('/Status');
   };
 
   const navigatetonextpage3 = () => {
-     navigate( '/');
+    navigate('/');
   };
   const navigatetonextpage4 = () => {
-     navigate( '/Societieslist');
+    navigate('/Societieslist');
   };
-  const navigate = useNavigate();
+
   const navigatetonextpage5 = () => {
     navigate('/SocietyActivities', { state: { societiesTitle: "" } });
   };
   const navigatetonextpage7 = () => {
-    navigate( '/Createevent');
- };
+    navigate('/Createevent');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Ensure auth is initialized and signOut correctly
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  };
 
   return (
     <div className="main-area-div">
       <div className="top-area">
         <div className="left-logo-side">
           <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-          <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+          <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
         </div>
         <div className="right-logo-side">
-          <div className="logout-section" onClick={navigatetonextpage3}>
+          <div className="logout-section" onClick={handleLogout}>
             <p className="logout-text">Logout</p>
             <IoLogOutOutline className="logout-button" />
           </div>
@@ -110,8 +121,8 @@ const Dashboard = () => {
         <h3 className='news-section-heading2'>Latest News</h3>
         <ul className="news-list-area">
           {loading ? (
-          <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
-          <h4>Loading...</h4></div>
+            <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
+              <h4>Loading...</h4></div>
           ) : (
             notifications.map((notification, index) => (
               <li key={index} className='news-text-area'>

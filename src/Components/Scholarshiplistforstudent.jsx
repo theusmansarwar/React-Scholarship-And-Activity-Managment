@@ -4,6 +4,7 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import './Scholarshiplistforstudent.css';
 import { IoArrowBackOutline, IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { MdFiberNew } from "react-icons/md";
 const Scholarshiplistforstudent = () => {
     const [scholarshipList, setScholarshipList] = useState([]);
     const [database, setDatabase] = useState(null);
@@ -38,10 +39,10 @@ const Scholarshiplistforstudent = () => {
         onValue(databaseRef, onDataChange);
     }, []);
     const filteredScholarships = scholarshipList.filter((scholarship) => {
-        const titleMatches =
-            searchName === '' || scholarship.scholarshipTitle.toLowerCase().includes(searchName.toLowerCase());
-
-        return titleMatches;
+        const searchTerm = searchName.toLowerCase();
+        const titleMatches = scholarship.scholarshipTitle.toLowerCase().includes(searchTerm);
+        const typeMatches = scholarship.scholarshipType.toLowerCase().includes(searchTerm);
+        return titleMatches || typeMatches;
     });
     const navigatetonextpage = () => {
         navigate('/Dashboard');
@@ -51,7 +52,17 @@ const Scholarshiplistforstudent = () => {
     const navigateToApplyScholarship = (title) => {
         navigate('/ApplyScholarship', { state: { scholarshipTitle: title } });
     };
-
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB'); 
+    }
+    const isNewItem = (uploadDate) => {
+        const currentDate = new Date();
+        const itemDate = new Date(uploadDate);
+        const differenceInTime = currentDate.getTime() - itemDate.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        return differenceInDays < 7;
+    };
     return (
         <div className='mainarea-userlist'>
             <h4 className='Scholarship-heading-top'>Scholarships</h4>
@@ -75,22 +86,27 @@ const Scholarshiplistforstudent = () => {
                                     <p className='Scholarship-det-text'> <strong className='strong'>Type:</strong> {scholarship.scholarshipType}</p>
                                     <p className='Scholarship-det-text'> <strong className='strong'>Amount:</strong> {scholarship.scholarshipAmount}</p>
                                     <p className='Scholarship-det-text'> <strong className='strong'>Criteria:</strong> {scholarship.eligibilityCriteria}</p>
+                                    <p className='Scholarship-det-text'> <strong>Required Documents:</strong> {scholarship.RequiredDocuments}</p>
+                        
+                                    <p className='Scholarship-det-text'><strong>Created On:</strong> {formatDate(scholarship.uploadDate)}</p>
+                                    <a href={scholarship.detaillink}>See details</a>
                                 </div>
                                 <div className="actions">
                                     <button className='submitbtn'
                                         onClick={() => navigateToApplyScholarship(scholarship.scholarshipTitle)}
                                     >Apply</button>
                                 </div>
+                                <div className="newicon">{isNewItem(scholarship.uploadDate) && <MdFiberNew />}</div>
                             </div>
 
                         </li>
                     ))}
                 </ul>
             ) : (
-               
-                    <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
+
+                <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
                     <h4>Loading...</h4></div>
-                  
+
             )}
         </div>
     );

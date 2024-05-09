@@ -30,7 +30,7 @@ const Forget = () => {
                     <div className="top-heading-area">
                         <div className="left-logo-side">
                             <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-                            <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+                            <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
                         </div>
                         <div className="right-logo-side"></div>
                     </div>
@@ -43,6 +43,7 @@ const Forget = () => {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </div>
                             <br />

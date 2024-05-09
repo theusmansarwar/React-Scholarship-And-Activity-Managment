@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import './Home.css';
-import { FaBookReader } from "react-icons/fa";
-import { RiRemoteControlFill } from "react-icons/ri";
+import { BiBookReader } from "react-icons/bi";
+import { PiStudentBold } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -11,8 +11,9 @@ const Home = () => {
   const handleClick = () => {
     navigate('/login');
   };
-  const handleClick2 = () => {
-    navigate('/Facultylogin');
+  const handleClick0 = () => {
+    const cuiportallink = 'https://swl-cms.comsats.edu.pk:8082/';
+    window.open(cuiportallink, '_blank');
   };
   return (
 
@@ -55,15 +56,15 @@ const Home = () => {
         <div className="midsideofmainsection">
           <h2>CUI Scholarship & Activities Portal</h2>
           <div className="cardareas">
+            <div className="card" onClick={handleClick0}>
+              <BiBookReader className='modulelogo' />
+              <p className='modulename'>University Student Portal</p>
+            </div>
             <div className="card" onClick={handleClick}>
-              <FaBookReader className='modulelogo' />
-              <p className='modulename'>Student Portal</p>
+              <PiStudentBold className='modulelogo' />
+              <p className='modulename'> Scholarship & Activities Portal</p>
             </div>
-            <div className="card" onClick={handleClick2}>
-              <RiRemoteControlFill className='modulelogo' />
-              <p className='modulename'>Faculty Portal</p>
-            </div>
-           
+
           </div>
           <h3 >CUOnline Introduction</h3>
           <p className='cuiintro'>CUOnline Principal Seat is responsible to automate all major COMSATS University processes under one umbrella as per rules regulations and policies of COMSATS University. It provides pure "Web Based" anytime/anywhere access to the administrative, transactional and academic process needed to manage day to day affairs of COMSATS University along with its 7 Regular Campuses and Virtual Campus.</p>

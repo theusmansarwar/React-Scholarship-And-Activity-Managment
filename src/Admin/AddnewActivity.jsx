@@ -19,7 +19,7 @@ const firebaseConfig = {
 
 
 const AddnewActivity = () => {
-    const [societyTitles, setSocietyTitles] = useState([]); 
+    const [societyTitles, setSocietyTitles] = useState([]);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
@@ -27,6 +27,7 @@ const AddnewActivity = () => {
         SocietyName: '',
         EventDate: '',
         EventVenu: '',
+        applylink:'',
     });
 
     const [loading2, setLoading2] = useState(false);
@@ -51,6 +52,8 @@ const AddnewActivity = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading2(true);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString(); 
 
         try {
             const usersRef = ref(database, 'Activities');
@@ -60,6 +63,8 @@ const AddnewActivity = () => {
                 SocietyName: formData.SocietyName,
                 EventDate: formData.EventDate,
                 EventVenu: formData.EventVenu,
+                uploadDate: formattedDate,
+                applylink: formData.applylink,
             });
             alert('Event Registered Successfully ');
             navigate('/Activities');
@@ -75,11 +80,11 @@ const AddnewActivity = () => {
                 <center><div className='loading-spinner2'></div></center>
             ) : (
                 <div className="main-area-div">
-                    <h3>{}</h3>
+                    <h3>{ }</h3>
                     <div className="top-heading-area">
                         <div className="left-logo-side">
                             <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-                            <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+                            <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
                         </div>
                         <div className="right-logo-side"></div>
                     </div>
@@ -89,15 +94,15 @@ const AddnewActivity = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="inputdiv">
                                     <label>Activity Name: </label><br />
-                                    <input type="text" name="title" value={formData.title} onChange={handleChange} />
+                                    <input type="text" name="title" value={formData.title} onChange={handleChange} required />
                                 </div>
                                 <div className="inputdiv">
                                     <label>Description: </label><br />
-                                    <textarea type="text" name="description" value={formData.description} onChange={handleChange} />
+                                    <textarea type="text" name="description" value={formData.description} onChange={handleChange}  required/>
                                 </div>
                                 <div className="inputdiv">
                                     <label>Society Name: </label><br />
-                                    <select name="SocietyName" value={formData.SocietyName} onChange={handleChange}>
+                                    <select name="SocietyName" value={formData.SocietyName} onChange={handleChange} required>
                                         <option value="">Select Society</option>
                                         {societyTitles.map((title, index) => (
                                             <option key={index} value={title}>{title}</option>
@@ -106,11 +111,15 @@ const AddnewActivity = () => {
                                 </div>
                                 <div className="inputdiv">
                                     <label>Event Date: </label><br />
-                                    <input type="date" name="EventDate" value={formData.EventDate} onChange={handleChange} />
+                                    <input type="date" name="EventDate" value={formData.EventDate} onChange={handleChange} required/>
+                                </div>
+                                <div className="inputdiv">
+                                    <label>Apply Form Link: </label><br />
+                                    <input type="link" name="applylink" value={formData.applylink} onChange={handleChange} required/>
                                 </div>
                                 <div className="inputdiv">
                                     <label>Event Venue: </label><br />
-                                    <input type="text" name="EventVenu" value={formData.EventVenu} onChange={handleChange} />
+                                    <input type="text" name="EventVenu" value={formData.EventVenu} onChange={handleChange} required/>
                                 </div>
                                 <br />
                                 <button className='submitbtn' type="submit">Submit</button>

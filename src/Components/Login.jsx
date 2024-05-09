@@ -19,7 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading2, setLoading2] = useState(false);
   const [userType, setUserType] = useState('');
-  
+
   useEffect(() => {
     setLoading(true);
     const notificationsRef = ref(database, 'notification');
@@ -59,8 +59,8 @@ const Login = () => {
             const userRef = ref(database, `userdata/${userId}/type`);
             onValue(userRef, (snapshot) => {
               const userType = snapshot.val();
-              setUserType(userType); 
-              
+              setUserType(userType);
+
               // Navigate based on user type
               switch (userType) {
                 case 'admin':
@@ -69,7 +69,7 @@ const Login = () => {
                 case 'user':
                   navigate('/Dashboard');
                   break;
-      
+
                 default:
                   navigate('/Dashboard'); // Default route for unknown types
               }
@@ -79,9 +79,11 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error logging in:', error.message);
+      alert(error.message); 
       setLoading2(false);
     }
   };
+  
 
   return (
     <div className='loading2'>
@@ -92,7 +94,7 @@ const Login = () => {
           <div className="top-heading-area">
             <div className="left-logo-side">
               <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-              <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+              <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
             </div>
             <div className="right-logo-side"></div>
           </div>
@@ -101,7 +103,7 @@ const Login = () => {
               <h3 className='news-section-heading'>NOTICEBOARD</h3>
               <ul className='notice-text-ul'>
                 {loading ? (
-                  <div className='loading-innoticeboard'> 
+                  <div className='loading-innoticeboard'>
                     {loading && <div className="loading-spinner-innoticeboard"></div>}
                   </div>
                 ) : (
@@ -112,19 +114,19 @@ const Login = () => {
               </ul>
             </div>
             <div className="form-area2">
-              <center><h3>Student Login</h3></center>
+              <center><h3>Login your account</h3></center>
               <form onSubmit={handleSubmit}>
                 <div className="inputdiv">
                   <label>Email: </label> <br />
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} required />
                   <br />
                 </div>
                 <div className="inputdiv">
                   <label>Password:</label> <br />
-                  <input type="password" name="password" value={formData.password} onChange={handleChange} />
+                  <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                 </div>
                 <div className="forgetarea">
-                  <p className='simpletext'><Link className='simpletextlink' to="/forget">Forget Password?</Link></p> 
+                  <p className='simpletext'><Link className='simpletextlink' to="/forget">Forget Password?</Link></p>
                 </div>
                 <br />
                 <button className='submitbtn' type="submit">Login</button>

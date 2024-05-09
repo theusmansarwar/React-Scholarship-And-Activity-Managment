@@ -99,9 +99,9 @@ const Status = () => {
           ))}
         </ul>
       ) : (
-           <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
+        <div className='loading-indashboard'> {loading && <div className="loading-spinner-indashboard"></div>}
           <h4>Loading...</h4></div>
-          
+
       )}
     </div>
   );

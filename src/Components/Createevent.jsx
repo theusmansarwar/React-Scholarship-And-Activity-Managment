@@ -51,7 +51,8 @@ const Createevent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading2(true);
-
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString(); 
         try {
             const usersRef = ref(database, 'Activities');
             await push(usersRef, {
@@ -60,9 +61,13 @@ const Createevent = () => {
                 SocietyName: formData.SocietyName,
                 EventDate: formData.EventDate,
                 EventVenu: formData.EventVenu,
+                uploadDate: formattedDate,
+                applylink: formData.applylink,
             });
             alert('Event Registered Successfully ');
-            navigate('/Activities');
+
+            navigate('/SocietyActivities', { state: { societiesTitle: "" } });
+
         } catch (error) {
             console.error('Error in Society Registering:', error.message);
             setLoading2(false);
@@ -86,11 +91,11 @@ const Createevent = () => {
                 <center><div className='loading-spinner2'></div></center>
             ) : (
                 <div className="main-area-div">
-                    <h3>{}</h3>
+                    <h3>{ }</h3>
                     <div className="top-heading-area">
                         <div className="left-logo-side">
                             <img className='campusimg1' src='./cuilogo.png' alt="Dynamic Image" />
-                            <h3 className='university-logo-text'>CUI Scholarship Portal</h3>
+                            <h3 className='university-logo-text'>CUI Scholarship & Activities Portal</h3>
                         </div>
                         <div className="right-logo-side"></div>
                     </div>
@@ -117,6 +122,10 @@ const Createevent = () => {
                                 <div className="inputdiv">
                                     <label>Event Venue: </label><br />
                                     <input type="text" name="EventVenu" value={formData.EventVenu} onChange={handleChange} />
+                                </div>
+                                <div className="inputdiv">
+                                    <label>Apply Form Link: </label><br />
+                                    <input type="link" name="applylink" value={formData.applylink} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <button className='submitbtn' type="submit">Submit</button>

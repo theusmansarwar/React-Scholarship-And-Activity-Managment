@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut as firebaseSignOut } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBj5kZy9sskXEg0xlbMDg35-pVvSTJm9Zw",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
+const signOut = () => firebaseSignOut(auth); // Create a wrapper function for signOut
 
-
-export { auth, app, database };
+export { auth, app, database, signOut };
 

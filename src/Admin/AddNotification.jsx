@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { app } from '../firebase';
-import { getDatabase, ref, push, onValue } from 'firebase/database';
-import { useNavigate, Link } from 'react-router-dom';
+import { getDatabase, ref, push } from 'firebase/database';
+import { useNavigate} from 'react-router-dom';
 
 const auth = getAuth(app);
 const database = getDatabase(app);
@@ -17,12 +17,10 @@ const firebaseConfig = {
     appId: "1:361327887400:web:9a6386f40f1c34b95fe11d",
 };
 
-const Addnews = () => {
+const AddNotification = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        link: '',
+       
 
     });
 
@@ -39,11 +37,9 @@ const Addnews = () => {
         try {
 
 
-            const usersRef = ref(database, 'news');
+            const usersRef = ref(database, 'notification');
             await push(usersRef, {
-                title: formData.title,
-                description: formData.description,
-                link: formData.link,
+                notify: formData.notify,
             });
             alert('News Added Successfully ');
             navigate('/Facultydashboard');
@@ -68,24 +64,12 @@ const Addnews = () => {
                     </div>
                     <div className='sub-area-div'>
                         <div className="form-area4">
-                            <center><h3>Add News</h3></center>
+                            <center><h3>Add new Notification</h3></center>
                             <form onSubmit={handleSubmit}>
                                 <div className="inputdiv">
                                     <label>
-                                        title: </label><br />
-                                    <input type="text" name="title" value={formData.title} onChange={handleChange} required/>
-                                </div>
-                                <div className="inputdiv">
-                                    <label>
-                                        Description: </label><br />
-                                    <textarea type="text" name="description" value={formData.description} onChange={handleChange}required />
-
-                                </div>
-
-                                < div className="inputdiv">
-                                    <label>
-                                        Link: </label><br />
-                                    <input type="link" name="link" value={formData.link} onChange={handleChange} required/>
+                                        Text: </label><br />
+                                    <input type="text" name="notify" value={formData.notify} onChange={handleChange} required />
                                 </div>
 
                                 <br />
@@ -103,4 +87,4 @@ const Addnews = () => {
     );
 };
 
-export default Addnews;
+export default AddNotification;
